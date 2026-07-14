@@ -31,16 +31,13 @@ Arguments:
   <category>              Name category (human, elf, dwarf, orc)
 
 Options:
-  -m, --male              Generate male names*
-  -f, --female            Generate female names*
+  -m, --male              Generate male names
+  -f, --female            Generate female names
   -s, --short             Generate short names
   -l, --full              Generate full names (first names + surnames)
   -n, --number <count>    Number of names to generate
       --seed <value>      Seed for reproducible generation
   -h, --help              Show help
-
-*Gender flags are mutually exclusive:
--m, -f, and -r cannot be combined.
 ```
 
 ## Decisions to finalize
@@ -56,7 +53,7 @@ Options:
   - [ ] Male
   - [ ] Female
   - [ ] Random (default)
-Non-binary and other options are currently unavailable
+Gender flags are mutually exclusive: `-m` and `-f` cannot be combined. Non-binary and other options are currently unavailable.
 
 - Supported lengths:
   - [ ] Short (default)
