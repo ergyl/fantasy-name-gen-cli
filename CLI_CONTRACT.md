@@ -28,7 +28,7 @@ ff-name --help
 ## Args and options
 ```
 Arguments:
-  <category>              Name category (human, elf, dwarf, orc)
+  <category>              Name category (human, elf, dwarven, orc)
 
 Options:
   -m, --male              Generate male names
@@ -57,7 +57,7 @@ Gender flags are mutually exclusive: `-m` and `-f` cannot be combined. Non-binar
 
 - Supported lengths:
   - [ ] Short (default)
-  - [ ] Long
+  - [ ] Full
 
 - Input rules:
   - [ ] Case-sensitive
