@@ -18,8 +18,8 @@ ff-name human -m -s
 # 20 female elf names
 ff-name elf -f -n 20
 
-# 5 dwarf names (reproducible)
-ff-name dwarf -n 5 --seed 12345
+# 5 dwarven names (reproducible)
+ff-name dwarven -n 5 --seed 12345
 
 # See all options
 ff-name --help
@@ -28,7 +28,7 @@ ff-name --help
 ## Args and options
 ```
 Arguments:
-  <category>              Name category (human, elf, dwarven, orc)
+  <category>              Name category (human, dwarven, orc, elf)
 
 Options:
   -m, --male              Generate male names
@@ -44,7 +44,7 @@ Options:
 
 - Supported races:
   - [ ] Human
-  - [ ] Dwarf
+  - [ ] Dwarven
   - [ ] Orc
   - [ ] Elf
   - ... More to come?
@@ -61,7 +61,7 @@ Gender flags are mutually exclusive: `-m` and `-f` cannot be combined. Non-binar
 
 - Input rules:
   - [ ] Case-sensitive
-  - [ ] Allow aliases?
+  - [ ] Aliases are unsupported
   - [ ] Fixed argument order
 
 - Default behavior when no mandatory arg is provided:
