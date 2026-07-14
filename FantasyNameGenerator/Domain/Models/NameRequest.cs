@@ -2,8 +2,10 @@ namespace FantasyNameGenerator.Models
 {
     public enum Race
     {
+        Human,
+        Dwarven,
         Orc,
-        Dwarven
+        Elf,
     }
 
     public enum Gender
@@ -20,7 +22,9 @@ namespace FantasyNameGenerator.Models
     }
 
     public record NameRequest(
-        Race Race = Race.Orc,
-        Gender Gender = Gender.Random,
-        Length Length = Length.Short);
+        Race Race,
+        Gender? Gender = Gender.Random,
+        Length? Length = Length.Short,
+        int? NumberOfNames = 1,
+        int? Seed = 12345);
 }
