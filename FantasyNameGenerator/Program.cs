@@ -1,9 +1,4 @@
-﻿using FantasyNameGenerator.Models;
-using FantasyNameGenerator.Services;
-using FantasyNameGenerator.Utils;
-using FantasyNameGenerator.Presentation;
-
-// Very thin composition root - keep logic out of Program.cs
+﻿// Very thin composition root - keeping logic out of Program.cs
 var argsList = args ?? Array.Empty<string>();
 
 // Simple parsing: expecting `category length` e.g. `orc -f`
