@@ -8,6 +8,7 @@ namespace FantasyNameGenerator.Models
         Elf,
     }
 
+
     public enum Gender
     {
         Male,
