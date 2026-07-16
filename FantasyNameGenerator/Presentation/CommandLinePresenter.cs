@@ -1,6 +1,6 @@
 namespace FantasyNameGenerator.UserInterface
 {
-    public class CommandLine
+    public class CommandLinePresenter
     {
         public void PrintName(string name)
         {
