@@ -1,14 +1,14 @@
 ﻿// Very thin composition root - keeping logic out of Program.cs
 var argsList = args ?? Array.Empty<string>();
 
-// Simple parsing: expecting `category length` e.g. `orc -f`
-Category category = Category.Orc;
+// Simple parsing: expecting `ff-name <race> [gender] [length] [options]`
+Race race = Race.Human;
 Length length = Length.Short;
 long? seed = null;
 
 if (argsList.Length >= 1)
 {
-    Enum.TryParse<Category>(argsList[0], true, out category);
+    Enum.TryParse<Race>(argsList[0], true, out race);
 }
 if (argsList.Length >= 2)
 {
@@ -25,8 +25,8 @@ for (int i = 0; i < argsList.Length - 1; i++)
 
 ISeededRandom rand = seed.HasValue ? new SeededRandomProvider(seed.Value) : new SeededRandomProvider();
 INameGenerator generator = new SimpleNameGenerator(rand);
-var request = new NameRequest(category, length);
+var request = new NameRequest(race, length);
 var name = generator.Generate(request);
 
-var presenter = new ConsolePresenter();
+var presenter = new CommandLinePresenter();
 presenter.PrintName(name);

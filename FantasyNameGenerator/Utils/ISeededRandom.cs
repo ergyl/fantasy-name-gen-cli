@@ -1,7 +1,6 @@
-namespace FantasyNameGenerator.Utils
+namespace FantasyNameGenerator.Utils;
+
+public interface ISeededRandom
 {
-    public interface ISeededRandom
-    {
-        int Next(int maxValue);
-    }
+    int Next(int maxValue);
 }

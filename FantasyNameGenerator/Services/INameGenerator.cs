@@ -1,7 +1,6 @@
-namespace FantasyNameGenerator.Services
+namespace FantasyNameGenerator.Services;
+
+public interface INameGenerator
 {
-    public interface INameGenerator
-    {
-        string Generate(NameRequest request);
-    }
+    string Generate(NameRequest request);
 }

@@ -1,6 +1,6 @@
-namespace FantasyNameGenerator.Infrastructure.Configuration;
+namespace FantasyNameGenerator.Domain.Models;
 
-public static class RaceCatakog
+public static class RaceCatalog
 {
     public record RaceConfig(
       Race Race,
