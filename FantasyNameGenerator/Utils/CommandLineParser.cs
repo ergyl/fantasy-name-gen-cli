@@ -21,13 +21,31 @@ public static class CommandLineParser
         }
 
         // Required: race
-        if (!Enum.TryParse<Race>(
-                args[0],
-                true,
-                out var race))
+        var rawRace = args[0];
+
+        // Reject null/empty/whitespace
+        if (string.IsNullOrWhiteSpace(rawRace))
         {
-            return new ParseResult.Failure($"Invalid race: '{args[0]}'");
+            return new ParseResult.Failure("Race cannot be empty or include whitespace.");
         }
+
+        // Reject leading/trailing whitespace
+        if (rawRace != rawRace.Trim())
+        {
+            return new ParseResult.Failure($"Unallowed leading/trailing whitespace in race: '{rawRace}'");
+        }
+
+        var validRaces = Enum.GetNames<Race>()
+            .Select(r => r.ToLowerInvariant());
+
+
+        // Reject incorrect casing by requiring exact enum name match
+        if (!validRaces.Contains(rawRace))
+        {
+            return new ParseResult.Failure($"Invalid race: '{rawRace}'");
+        }
+
+        var race = Enum.Parse<Race>(rawRace, ignoreCase: true);
 
         Gender? gender = null;
         Length? length = null;
@@ -36,42 +54,49 @@ public static class CommandLineParser
 
         int i = 1;
 
-        // Optional: gender
+        // Optional positional: gender at index 1
         if (i < args.Length &&
-            Enum.TryParse<Gender>(
-                args[i],
-                true,
-                out var parsedGender))
+            Enum.TryParse<Gender>(args[i], true, out var parsedGender))
         {
             gender = parsedGender;
             i++;
         }
 
-        // Optional: length
+        // Optional positional: length at index 2
         if (i < args.Length &&
-            Enum.TryParse<Length>(
-                args[i],
-                true,
-                out var parsedLength))
+            Enum.TryParse<Length>(args[i], true, out var parsedLength))
         {
             length = parsedLength;
             i++;
         }
 
-        // Remaining args are options
+        // Parse remaining args as option flags
         while (i < args.Length)
         {
             switch (args[i])
             {
-                case "--seed":
-                    if (i + 1 >= args.Length ||
-                        !int.TryParse(args[i + 1], out var seedValue))
-                    {
-                        return new ParseResult.Failure("--seed requires a valid integer value.");
-                    }
+                case "-m":
+                case "--male":
+                    gender = Gender.Male;
+                    i++;
+                    break;
 
-                    seed = seedValue;
-                    i += 2;
+                case "-f":
+                case "--female":
+                    gender = Gender.Female;
+                    i++;
+                    break;
+
+                case "-s":
+                case "--short":
+                    length = Length.Short;
+                    i++;
+                    break;
+
+                case "-l":
+                case "--full":
+                    length = Length.Long;
+                    i++;
                     break;
 
                 case "-n":
@@ -81,14 +106,22 @@ public static class CommandLineParser
                     {
                         return new ParseResult.Failure("-n/--number requires a valid integer value.");
                     }
-
                     numberOfNames = numberValue;
                     i += 2;
                     break;
 
+                case "--seed":
+                    if (i + 1 >= args.Length ||
+                        !long.TryParse(args[i + 1], out var seedValue))
+                    {
+                        return new ParseResult.Failure("--seed requires a valid integer value.");
+                    }
+                    seed = seedValue;
+                    i += 2;
+                    break;
 
                 default:
-                    return new ParseResult.Failure("Unrecognized option specified.");
+                    return new ParseResult.Failure($"Unrecognized option: '{args[i]}'");
             }
         }
 

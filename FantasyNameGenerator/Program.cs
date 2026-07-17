@@ -13,7 +13,11 @@ while (true)
 
     if (request is Parser.ParseResult.Failure failure)
     {
-        CommandLinePresenter.PrintHelp(failure.Message);
+        CommandLinePresenter.PrintError(failure.Message);
+        return;
+    }
+    {
+        CommandLinePresenter.PrintHelp();
         return;
     }
 

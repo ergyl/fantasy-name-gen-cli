@@ -6,7 +6,7 @@ This file is a working draft for the first user-facing behavior of the CLI.
 
 ## Proposed command shape
 
-- `ff-name <race> [gender] [length] [options]`
+- `ff-name <race> [options]`
 - Examples:
 ```
 # Random human name
@@ -27,17 +27,17 @@ ff-name --help
 
 ## Args and options
 ```
-Arguments:
-  <category>              Name category (human, dwarven, orc, elf)
+Required positional argument:
+<race>              Race (human, dwarven, orc, elf)
 
 Options:
-  -m, --male              Generate male names
-  -f, --female            Generate female names
-  -s, --short             Generate short names
-  -l, --full              Generate full names (first names + surnames)
-  -n, --number <count>    Number of names to generate
-      --seed <value>      Seed for reproducible generation
-  -h, --help              Show help
+-m, --male              Male names
+-f, --female            Female names
+-s, --short name        Short names
+-l, --full name         Full names (first names + surnames)
+-n, --number <count>    Number of names to generate
+--seed <value>          Seed for reproducible generation
+-h, --help              Show help
 ```
 
 ## Decisions to finalize
@@ -60,9 +60,10 @@ Gender flags are mutually exclusive: `-m` and `-f` cannot be combined. Non-binar
   - [ ] Full
 
 - Input rules:
-  - [ ] Case-sensitive
-  - [ ] Aliases are unsupported
-  - [ ] Fixed argument order
+  - [ ] Case-sensitive (must match lowercase enum values exactly)
+  - [ ] No positional optional arguments (only <race>)
+  - [ ] Options may appear in any order
+  - [ ] Duplicate or conflicting options result in failure
 
 - Default behavior when no mandatory arg is provided:
   - [ ] Show helpful ("help")

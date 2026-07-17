@@ -8,25 +8,27 @@ public class CommandLinePresenter
         Console.WriteLine($"Error: {message}");
         Console.WriteLine("Enter --h or --help for usage information.");
     }
-    public static void PrintHelp(string message?= null)
+    public static void PrintHelp()
     {
         Console.WriteLine(@"==========================
         Fantastic Fantasy Name Generator
         ==========================
-        Command shape: ff-name <race> [gender] [length] [options]
-        Example: ff-name human -m -s
+        Command shape: ff-name <race> [options]
+        Example: ff-name orc -m -s (orc male short name)
         ==========================
-        Arguments:
-        <category> 	 Name category (human, elf, dwarf, orc)
-        
-        Options:
-        -m, --male              Generate male names*
-        -f, --female            Generate female names*
-        -s, --short             Generate short names
-        -l, --full              Generate full names (first names + surnames)
-        -n, --number <count>    Number of names to generate
-        --seed <value>      Seed for reproducible generation
-        -h, --help              Show help
+     ```
+     Required positional argument:
+     <race>              Race (human, dwarven, orc, elf)
+    
+    Options:
+    -m, --male              Male names
+    -f, --female            Female names
+    -s, --short name        Short names
+    -l, --full name         Full names (first names + surnames)
+    -n, --number <count>    Number of names to generate
+    --seed <value>          Seed for reproducible generation
+    -h, --help              Show help
+```
 ");
     }
 
