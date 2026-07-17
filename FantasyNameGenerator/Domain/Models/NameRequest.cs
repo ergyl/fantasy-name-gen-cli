@@ -26,5 +26,5 @@ public record NameRequest(
     Race Race,
     Length? Length = Length.Short,
     Gender? Gender = Gender.Random,
-    int NumberOfNames = 1,
-    int? Seed = 12345);
+    int? NumberOfNames = 1,
+    long? Seed = 12345);

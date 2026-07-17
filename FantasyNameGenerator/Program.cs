@@ -1,32 +1,35 @@
-﻿// Very thin composition root - keeping logic out of Program.cs
-var argsList = args ?? Array.Empty<string>();
+﻿using Parser = FantasyNameGenerator.Utils.CommandLineParser;
 
-// Simple parsing: expecting `ff-name <race> [gender] [length] [options]`
-Race race = Race.Human;
-Length length = Length.Short;
-long? seed = null;
+// Very thin composition root - keeping logic out of Program.cs
 
-if (argsList.Length >= 1)
+var seededRandom = new SeededRandomProvider();
+var ng = new SimpleNameGenerator(seededRandom);
+
+var presenter = new CommandLinePresenter();
+
+while (true)
 {
-    Enum.TryParse<Race>(argsList[0], true, out race);
-}
-if (argsList.Length >= 2)
-{
-    Enum.TryParse<Length>(argsList[1], true, out length);
-}
-// optional --seed 123
-for (int i = 0; i < argsList.Length - 1; i++)
-{
-    if (argsList[i].Equals("--seed", StringComparison.OrdinalIgnoreCase))
+    var request = Parser.Parse(args);
+
+    if (request is Parser.ParseResult.Failure failure)
     {
-        if (long.TryParse(argsList[i + 1], out var s)) seed = s;
+        CommandLinePresenter.PrintHelp(failure.Message);
+        return;
+    }
+
+    if (request is Parser.ParseResult.Success success)
+    {
+        var nameRequest = new NameRequest(
+            success.Race,
+            success.Length,
+            success.Gender,
+            success.NumberOfNames,
+            success.Seed);
+
+        var name = ng.Generate(nameRequest);
+
+        presenter.PrintName(name);
     }
 }
 
-ISeededRandom rand = seed.HasValue ? new SeededRandomProvider(seed.Value) : new SeededRandomProvider();
-INameGenerator generator = new SimpleNameGenerator(rand);
-var request = new NameRequest(race, length);
-var name = generator.Generate(request);
 
-var presenter = new CommandLinePresenter();
-presenter.PrintName(name);
