@@ -20,6 +20,11 @@ public static class CommandLineParser
             return new ParseResult.Failure("No arguments provided. Race argument is required.");
         }
 
+        if (args.Length == 1 && (args[0] == "-h" || args[0] == "--help"))
+        {
+            return new ParseResult.Help();
+        }
+
         // Required: race
         var rawRace = args[0];
 
@@ -132,5 +137,6 @@ public static class CommandLineParser
     {
         public sealed record Success(Race Race, Gender? Gender, Length? Length, int? NumberOfNames, long? Seed) : ParseResult;
         public sealed record Failure(string Message) : ParseResult;
+        public sealed record Help : ParseResult;
     }
 }

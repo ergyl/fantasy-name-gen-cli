@@ -7,33 +7,33 @@ var ng = new SimpleNameGenerator(seededRandom);
 
 var presenter = new CommandLinePresenter();
 
-while (true)
+var request = Parser.Parse(args);
+
+if (request is Parser.ParseResult.Failure failure)
 {
-    var request = Parser.Parse(args);
+    CommandLinePresenter.PrintError(failure.Message);
+    Environment.Exit(1);
+}
 
-    if (request is Parser.ParseResult.Failure failure)
-    {
-        CommandLinePresenter.PrintError(failure.Message);
-        return;
-    }
-    {
-        CommandLinePresenter.PrintHelp();
-        return;
-    }
+if (request is Parser.ParseResult.Help)
+{
+    CommandLinePresenter.PrintHelp();
+    Environment.Exit(0);
+}
 
-    if (request is Parser.ParseResult.Success success)
-    {
-        var nameRequest = new NameRequest(
-            success.Race,
-            success.Length,
-            success.Gender,
-            success.NumberOfNames,
-            success.Seed);
+if (request is Parser.ParseResult.Success success)
+{
+    var nameRequest = new NameRequest(
+        success.Race,
+        success.Length,
+        success.Gender,
+        success.NumberOfNames,
+        success.Seed);
 
-        var name = ng.Generate(nameRequest);
+    var name = ng.Generate(nameRequest);
 
-        presenter.PrintName(name);
-    }
+    presenter.PrintName(name);
+    Environment.Exit(0);
 }
 
 
