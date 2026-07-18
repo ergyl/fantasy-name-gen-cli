@@ -2,17 +2,17 @@
 
 Build the CLI in small TDD slices around three stable boundaries: argument parsing, name generation, and console output. Start by defining the command-line contract for category plus length, then add a deterministic generator core that can be tested without the console, and only after that wire the entrypoint to print results. This keeps each iteration shippable and makes random output testable.
 
-**Milestone 0: Decide the CLI contract**
-1. Define the first supported forms, for example `orc long`, `dwarven short`, and whether order is fixed or flexible.
-2. Decide the default behavior when no args are provided.
-3. Decide how invalid inputs are handled: usage text plus non-zero exit code, or fallback defaults.
-4. Decide whether categories are case-insensitive and whether aliases are allowed.
+**Milestone 0: Decide the CLI contract** <- completed
+1. ~~Define the first supported forms, for example `orc long`, `dwarven short`, and whether order is fixed or flexible.~~
+2. ~~Decide the default behavior when no args are provided.~~
+3. ~~Decide how invalid inputs are handled: usage text plus non-zero exit code, or fallback defaults.~~
+4. ~~Decide whether categories are case-insensitive and whether aliases are allowed.~~
 
-**Milestone 1: Parse and validate args**
-1. Write failing tests for parsing a valid category and length.
-2. Write failing tests for unknown category, unknown length, and empty input.
-3. Add tests for normalization, such as `Orc`, `orc`, and `ORC` if you want case-insensitive input.
-4. Implement the smallest parser that produces a typed request object or validation error.
+**Milestone 1: Parse and validate args** <- completed
+1. ~~Write failing tests for parsing a valid category and length.~~
+2. ~~Write failing tests for unknown category, unknown length, and empty input.~~
+3. ~~Add tests for normalization, such as `Orc`, `orc`, and `ORC` if you want case-insensitive input.~~
+4. ~~Implement the smallest parser that produces a typed request object or validation error.~~
 
 **Milestone 2: Create the generation seam**
 1. Add a request model that captures category, length, and any future knobs.
