@@ -1,5 +1,10 @@
 namespace FantasyNameGenerator.Domain.Models;
 
+/// <summary>
+/// This class is UNUSED and is a placeholder for future use. 
+/// It is intended to hold the configuration of the generator, such as which races are available.
+/// </summary>
+
 public static class RaceCatalog
 {
     public record RaceConfig(
