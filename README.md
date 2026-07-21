@@ -19,4 +19,5 @@ Text
 Text
 
 ## Future features (to be added)
-Display output as formatted JSON if flag `--json` is passed.
+- Display output as formatted JSON if flag `--json` is passed.
+- Get tab completion values at runtime
