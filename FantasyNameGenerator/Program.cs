@@ -1,39 +1,23 @@
-﻿using Parser = FantasyNameGenerator.Utils.CommandLineParser;
+﻿using Microsoft.Extensions.DependencyInjection;
+using FantasyNameGenerator.Application;
+using appConfig = FantasyNameGenerator.Infrastructure.Configuration.ServiceConfigurator;
+namespace FantasyNameGenerator;
 
-// Very thin composition root - keeping logic out of Program.cs
-
-var seededRandom = new SeededRandomProvider();
-var ng = new SimpleNameGenerator(seededRandom);
-
-var presenter = new CommandLinePresenter();
-
-var request = Parser.Parse(args);
-
-if (request is Parser.ParseResult.Failure failure)
+public static class Program
 {
-    CommandLinePresenter.PrintError(failure.Message);
-    Environment.Exit(1);
+    /// <summary>
+    /// Very thin wrapper around the FantasyNameGeneratorApp to allow for dependency injection and service configuration.
+    /// </summary>
+    /// <param name="args">CLI arguments</param>
+    /// <returns>Exit code</returns>
+    public static int Main(string[] args)
+    {
+        var services = new ServiceCollection();
+        appConfig.ConfigureServices(services);
+
+        using var provider = services.BuildServiceProvider();
+        var app = provider.GetRequiredService<FantasyNameGeneratorApp>();
+
+        return app.Run(args);
+    }
 }
-
-if (request is Parser.ParseResult.Help)
-{
-    CommandLinePresenter.PrintHelp();
-    Environment.Exit(0);
-}
-
-if (request is Parser.ParseResult.Success success)
-{
-    var nameRequest = new NameRequest(
-        success.Race,
-        success.Length,
-        success.Gender,
-        success.NumberOfNames,
-        success.Seed);
-
-    var name = ng.Generate(nameRequest);
-
-    presenter.PrintName(name);
-    Environment.Exit(0);
-}
-
-

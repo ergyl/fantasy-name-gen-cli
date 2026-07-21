@@ -2,5 +2,5 @@ namespace FantasyNameGenerator.Services;
 
 public interface INameGenerator
 {
-    string Generate(NameRequest request);
+    List<string> Generate(NameRequest request);
 }

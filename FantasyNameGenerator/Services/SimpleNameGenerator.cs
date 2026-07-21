@@ -4,38 +4,48 @@ public class SimpleNameGenerator : INameGenerator
 {
     private readonly ISeededRandom _rand;
 
-    private static readonly string[] OrcPrefixes = { "Gor", "Brak", "Uzg", "Kr" };
-    private static readonly string[] OrcSuffixesLong = { "thak", "mash", "gor", "zugoth" };
-    private static readonly string[] OrcSuffixesShort = { "uk", "arg", "og" };
-
-    private static readonly string[] DwarfPrefixes = { "Thro", "Dur", "Balin", "Gim" };
-    private static readonly string[] DwarfSuffixesLong = { "insson", "grum", "dain", "mir" };
-    private static readonly string[] DwarfSuffixesShort = { "in", "ur", "or" };
-
     public SimpleNameGenerator(ISeededRandom rand) => _rand = rand;
 
-    public string Generate(NameRequest request)
+    public List<string> Generate(NameRequest request)
+    {
+        return [GenerateHuman(request)];
+    }
+
+    private string GenerateHuman(NameRequest request)
+    {
+        return "Bob Smith";
+    }
+
+    private string GenerateHuman(NameRequest request, int numberOfNames)
     {
         return "";
     }
 
-
-    private string GenerateHuman(NameRequest length)
+    private string GenerateDwarf(NameRequest request)
     {
         return "";
     }
 
-    private string GenerateDwarf(NameRequest length)
+    private string GenerateDwarf(NameRequest request, int numberOfNames)
     {
         return "";
     }
 
-    private string GenerateOrc(NameRequest length)
+    private string GenerateOrc(NameRequest request)
     {
         throw new NotImplementedException("Orc name generation is not implemented yet.");
     }
 
-    private string GenerateElf(NameRequest length)
+    private string GenerateOrc(NameRequest request, int numberOfNames)
+    {
+        throw new NotImplementedException("Orc name generation is not implemented yet.");
+    }
+    private string GenerateElf(NameRequest request)
+    {
+        throw new NotImplementedException("Elf name generation is not implemented yet.");
+    }
+
+    private string GenerateElf(NameRequest request, int numberOfNames)
     {
         throw new NotImplementedException("Elf name generation is not implemented yet.");
     }
