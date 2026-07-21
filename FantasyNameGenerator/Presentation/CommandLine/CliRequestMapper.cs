@@ -1,3 +1,4 @@
+namespace FantasyNameGenerator.Presentation.CommandLine;
 
 /// <summary>
 /// Maps the command line request to the internal request model.
