@@ -14,11 +14,11 @@ Build the CLI in small TDD slices around three stable boundaries: argument parsi
 3. ~~Add tests for normalization, such as `Orc`, `orc`, and `ORC` if you want case-insensitive input.~~
 4. ~~Implement the smallest parser that produces a typed request object or validation error.~~
 
-**Milestone 2: Create the generation seam**
-1. Add a request model that captures category, length, and any future knobs.
-2. Add a generator interface so generation can be tested without `Program.cs`.
-3. Add a fake or seeded randomness source for deterministic tests.
-4. Keep the console entrypoint out of the generation logic.
+**Milestone 2: Create the generation seam** <- completed
+1. ~~Add a request model that captures category, length, and any future knobs.~~
+2. ~~Add a generator interface so generation can be tested without `Program.cs`.~~
+3. ~~Add a fake or seeded randomness source for deterministic tests.~~
+4. ~~Keep the console entrypoint out of the generation logic.~~
 
 **Milestone 3: Implement the first name slice**
 1. Pick one category/length combination, such as `orc long`.
