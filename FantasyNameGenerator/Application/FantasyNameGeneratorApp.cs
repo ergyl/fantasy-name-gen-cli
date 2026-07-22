@@ -38,7 +38,6 @@ public class FantasyNameGeneratorApp
                 return ExitCodeError;
             }
 
-
             var cliRequest = new CliRequest
             {
                 Race = parseResult.GetValue(_cliContract.RaceArg)!,

@@ -1,3 +1,5 @@
+namespace FantasyNameGenerator.Presentation.CommandLine;
+
 public record CliRequest
 {
     public required string Race { get; init; }
