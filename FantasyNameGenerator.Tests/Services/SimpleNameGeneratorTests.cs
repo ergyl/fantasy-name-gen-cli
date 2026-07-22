@@ -1,7 +1,7 @@
 using Xunit;
 namespace FantasyNameGenerator.Tests;
 
-public class NameGeneratorTests
+public class SimpleNameGeneratorTests
 {
     [Fact]
     public void SameSeed_ProducesSameName()
